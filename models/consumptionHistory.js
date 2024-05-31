@@ -1,8 +1,8 @@
 const { db } = require("../db");
 
-exports.getConsumptionHistory = async (cHistoryID) => {
+exports.getConsumptionHistory = async (data, dataType) => {
     let sql = `SELECT ch.cHistoryID cHistoryID, ch.userID userID, ch.date date , ch.amount amount, ch.content content, ch.category category, 
-    FROM consumptionHistory ch WHERE cHistoryID=${cHistoryID}`;
+    FROM consumptionHistory ch WHERE ${dataType}=${data}`;
     let [rows, fields] = await db.query(sql);
     console.log(rows);
     return rows;

@@ -24,6 +24,13 @@ exports.getConsumptionHistoryByDate = async (data, userID) => {
     return rows;
 };
 
+exports.getTotalConsumptionAmount = async (userID) => {
+    let sql = `SELECT sum(amount) FROM consumptionHistory ch WHERE userID=${userID}`;
+    let [rows, fields] = await db.query(sql);
+    console.log(rows);
+    return rows;
+};
+
 exports.postConsumptionHistory = async (userID, date, content, amount, category, secret) => {
     let sql = `
         INSERT INTO consumptionHistory 

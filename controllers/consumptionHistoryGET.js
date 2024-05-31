@@ -26,8 +26,8 @@ router.get('/getConsumptionHistory/cHistoryID', async (req, res)=> {
 
 router.get('/getConsumptionHistory/date', async (req, res)=> {
     try{
-        const {date} = req.params;
-        const result = await consumptionHistoryDB.getConsumptionHistory('date', date);
+        const {date, userID} = req.body;
+        const result = await consumptionHistoryDB.getConsumptionHistoryByDate(date, userID);
         const newResult = result[0];
         newResult.date = dateFormat(newResult.date);
 
@@ -56,8 +56,8 @@ router.get('/getConsumptionHistory/userID', async (req, res)=> {
 
 router.get('/getConsumptionHistory/month', async (req, res)=> {
     try{
-        const {month} = req.params;
-        const result = await consumptionHistoryDB.getConsumptionHistory('month', month);
+        const {month, userID} = req.params;
+        const result = await consumptionHistoryDB.getConsumptionHistoryByMonth(month, userID);
         const newResult = result[0];
         newResult.date = dateFormat(newResult.date);
 

@@ -8,6 +8,22 @@ exports.getConsumptionHistory = async (data, dataType) => {
     return rows;
 };
 
+exports.getConsumptionHistoryByMonth = async (data, userID) => {
+    let sql = `SELECT ch.cHistoryID cHistoryID, ch.userID userID, ch.date date , ch.amount amount, ch.content content, ch.category category, 
+    FROM consumptionHistory ch WHERE userID=${userID} AND MONTH(date)=MONTH(${data}) AND YEAR(date)=YEAR(${data})`;
+    let [rows, fields] = await db.query(sql);
+    console.log(rows);
+    return rows;
+};
+
+exports.getConsumptionHistoryByDate = async (data, userID) => {
+    let sql = `SELECT ch.cHistoryID cHistoryID, ch.userID userID, ch.date date , ch.amount amount, ch.content content, ch.category category, 
+    FROM consumptionHistory ch WHERE userID=${userID} AND date=${data}`;
+    let [rows, fields] = await db.query(sql);
+    console.log(rows);
+    return rows;
+};
+
 exports.postConsumptionHistory = async (userID, date, content, amount, category, secret) => {
     let sql = `
         INSERT INTO consumptionHistory 

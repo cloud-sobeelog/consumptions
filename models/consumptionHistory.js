@@ -1,5 +1,6 @@
 const { db } = require("../db");
 
+//cHistoryID, userID로 데이터를 찾아오는 모델
 exports.getConsumptionHistory = async (data, dataType) => {
     let sql = `SELECT ch.cHistoryID cHistoryID, ch.userID userID, ch.date date , ch.amount amount, ch.content content, ch.category category, 
     FROM consumptionHistory ch WHERE ${dataType}=${data}`;
@@ -8,6 +9,7 @@ exports.getConsumptionHistory = async (data, dataType) => {
     return rows;
 };
 
+//data는 yyyy-mm 형식으로 입력
 exports.getConsumptionHistoryByMonth = async (data, userID) => {
     let sql = `SELECT ch.cHistoryID cHistoryID, ch.userID userID, ch.date date , ch.amount amount, ch.content content, ch.category category, 
     FROM consumptionHistory ch WHERE userID=${userID} AND MONTH(date)=MONTH(${data}) AND YEAR(date)=YEAR(${data})`;
@@ -16,6 +18,7 @@ exports.getConsumptionHistoryByMonth = async (data, userID) => {
     return rows;
 };
 
+//data는 yyyy-mm-dd 형식으로 입력
 exports.getConsumptionHistoryByDate = async (data, userID) => {
     let sql = `SELECT ch.cHistoryID cHistoryID, ch.userID userID, ch.date date , ch.amount amount, ch.content content, ch.category category, 
     FROM consumptionHistory ch WHERE userID=${userID} AND date=${data}`;

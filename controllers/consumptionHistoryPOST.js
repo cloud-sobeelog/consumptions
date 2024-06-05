@@ -5,14 +5,14 @@ const { consumptionHistoryDB } = require("../models");
 
 module.exports = async (req, res) => {
     try{
-        const { content, date, amount, category, secret, userID } = req.body;
+         const { content, date, amount, category, secret, userID } = req.body;
 
-        if (content.length >= 50) {
-            return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.TOO_MUCH_LONG_VALUE));
-        }
+         if (content.length >= 50) {
+             return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.TOO_MUCH_LONG_VALUE));
+         }
 
-        const result = await consumptionHistoryDB.postConsumptionHistory(userID, date, content, amount, category, secret);
-        return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.ADD_ONE_POST_SUCCESS));
+         const result = await consumptionHistoryDB.postConsumptionHistory(userID, date, content, amount, category, secret);
+         return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.ADD_ONE_POST_SUCCESS));
     }
     catch(err){
         console.log(err);

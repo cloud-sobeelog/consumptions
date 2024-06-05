@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: consumption
+  name: consumptions
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: consumption
+      app: consumptions
   template:
     metadata:
       labels:
-        app: consumption
+        app: consumptions
     spec:
       containers:
-      - name: consumption
-        image: youthful_yonath/consumption:0.1
+      - name: consumptions
+        image: choiyoorim/consumptions:0.1
         ports:
         - containerPort: 8081 # 내부 컨테이너 포트
         imagePullPolicy: Always
@@ -22,10 +22,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: consumption
+  name: consumptions
 spec:
   selector:
-    app: consumption
+    app: consumptions
   ports:
   - protocol: TCP
     port: 3000 # 외부에 노출할 포트

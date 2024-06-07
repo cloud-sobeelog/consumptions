@@ -31,13 +31,21 @@ const getConsumptionHistoryByDate = async(userID, date) => {
     return rows;
 };
 
-const getConsumptionHistoryByUserID = async(userID) => {
-    let sql =
+const getConsumptionHistoryByUserID = async(userID, requestingUserID) => {
+    let sql;
+    if(userID==requestingUserID){
+    sql =
     `SELECT cHistoryID, userID, amount, content, category, date
     FROM consumptionHistory
-    WHERE userID = ${userID}`;
+    WHERE userID = ${userID}`;}
+    else{
+    sql =
+    `SELECT cHistoryID, userID, amount, content, category, date
+    FROM consumptionHistory
+    WHERE userID = ${userID} and secret = 0`};
     let [rows, fields] = await db.query(sql);
     return rows;
+    
 };
 
 //date는 yyyy-mm-dd 형식으로 입력

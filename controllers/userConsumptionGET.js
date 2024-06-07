@@ -12,9 +12,9 @@ function dateFormat(date) {
 
 module.exports = async (req, res) => {
     try {
-        const { userID } = req.params;
+        const { userID, requestingUserID } = req.params;
 
-        let result = await consumptionHistoryDB.getConsumptionHistoryByUserID(userID);
+        let result = await consumptionHistoryDB.getConsumptionHistoryByUserID(userID, requestingUserID);
         async function asyncForEach(result) {
             for (let index = 0; index < result.length; index++) {
                 result[index].date = dateFormat(result[index].date);

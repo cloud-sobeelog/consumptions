@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: consumptions
-        image: choiyoorim/consumptions:0.2
+        image: choiyoorim/consumptions:0.3
         ports:
         - containerPort: 8081 # 내부 컨테이너 포트
         imagePullPolicy: Always

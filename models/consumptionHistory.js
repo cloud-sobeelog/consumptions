@@ -50,7 +50,7 @@ const getConsumptionHistoryByUserID = async(userID, requestingUserID) => {
 
 //date는 yyyy-mm-dd 형식으로 입력
 const getTotalConsumptionAmount = async(userID, date) => {
-    let sql = `SELECT SUM(amount)
+    let sql = `SELECT SUM(amount) AS t_amount
     FROM consumptionHistory
     WHERE userID = ${userID} AND date = '${date}'`
     let [rows, fields] = await db.query(sql);
